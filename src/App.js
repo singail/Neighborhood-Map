@@ -9,9 +9,8 @@ class App extends Component {
   }
   
   componentDidMount() {
-    this.loadMap("https://maps.googleapis.com/maps/api/js?key=AIzaSyAcES-3fnf6KWMLzALjjuNv0VYMX9UmIZA&callback=initMap");
-    window.initMap = this.initMap;
     this.getVenues();
+    window.initMap = this.initMap;
   }
 
   loadMap = (url) => {
@@ -27,13 +26,32 @@ class App extends Component {
       center: {lat: 54.6871555, lng: 25.2796514},
       zoom: 15
     });
+
+    this.state.venues.map(venue => {
+      const marker = new window.google.maps.Marker({
+        position: {lat: venue.venue.location.lat, lng: venue.venue.location.lng},
+        map: map,
+        title: venue.venue.name
+      })
+
+      const infowindow = new window.google.maps.InfoWindow({
+        content: venue.venue.name + ', ' + venue.venue.location.address
+      });
+
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+  
+    })
   }
 
   getVenues = () => {
-    fetch('https://api.foursquare.com/v2/venues/search?ll=54.6871555,25.2796514&client_id=Q4IHJEVQLQJ05AGABSEKEZGWTHGGURFQ2JW4AOZYHVXU5UIX&client_secret=XE00D13XAWZVJMPQEQNQYLJ3XUUYN3JEMFSYPVOTH0YSAQZ4&v=20180820')
+    fetch('https://api.foursquare.com/v2/venues/explore?ll=54.6871555,25.2796514&client_id=Q4IHJEVQLQJ05AGABSEKEZGWTHGGURFQ2JW4AOZYHVXU5UIX&client_secret=XE00D13XAWZVJMPQEQNQYLJ3XUUYN3JEMFSYPVOTH0YSAQZ4&v=20180820')
       .then(response => response.json())
-        .then(data => this.setState({ venues: data }));
+        .then(response => this.setState({venues: response.response.groups[0].items}, this.loadMap("https://maps.googleapis.com/maps/api/js?key=AIzaSyAcES-3fnf6KWMLzALjjuNv0VYMX9UmIZA&callback=initMap")))
   }
+
+
 
   render() {
     return (
