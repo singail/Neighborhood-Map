@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from './Header.js'
+import Header from './Header.js';
 import Footer from './Footer.js';
+import VenuesList from './VenuesList.js'
 
 class App extends Component {
 
@@ -64,9 +65,10 @@ class App extends Component {
 
   render() {
     return (
-      <div class='app'>
+      <div className='app'>
         <Header />
         <main>
+          <VenuesList venues={this.state.venues}/>
           <div id='map'></div>
         </main>
         <Footer />

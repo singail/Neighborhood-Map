@@ -1,9 +1,16 @@
+main {
+  display: flex;
+}
+
+/* Map style */
 #map {
   height: 91vh;
   margin: 0;
   padding: 0;
+  width: 80%;
 }
 
+/* Header & Footer style */
 .header {
   height: 6vh;
   background-color: #a5d1cc;
@@ -34,4 +41,31 @@ header p {
   font-size: 2em;
 }
 
+footer p {
+  font-size: 0.8em;
+}
+
+/* Sidebar style */
+
+.sidebar {
+  height: 91vh;
+  margin: 0;
+  padding: 0;
+  width: 20%;
+  background-color: #bdded8;
+}
+
+.search-field {
+  display: flex;
+  width: 100%;
+  height: 40px;
+}
+
+input {
+  width: 80%;
+}
+
+button {
+  width: 20%;
+}
 
