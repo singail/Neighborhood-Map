@@ -1,5 +1,37 @@
 #map {
-  height: 100vh;
+  height: 91vh;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  height: 6vh;
+  background-color: #a5d1cc;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+footer {
+  height: 3vh;
+  margin: 0;
+  padding: 0;
+  background-color: #a5d1cc;
+  position: relative;
+}
+
+header p, footer p {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+header p {
+  font-size: 2em;
 }
 
 
