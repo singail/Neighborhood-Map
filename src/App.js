@@ -68,7 +68,7 @@ class App extends Component {
 
   //Fetch venues from Foursquare API
   getVenues = () => {
-    fetch('https://api.foursquare.com/v2/venues/explore?ll=54.6871555,25.2796514&section=coffee&client_id=Q4IHJEVQLQJ05AGABSEKEZGWTHGGURFQ2JW4AOZYHVXU5UIX&client_secret=XE00D13XAWZVJMPQEQNQYLJ3XUUYN3JEMFSYPVOTH0YSAQZ4&v=20180820')
+    fetch('https://api.foursquare.com/v2/venues/explore?ll=54.6871555,25.2796514&section=coffee&limit=25&client_id=Q4IHJEVQLQJ05AGABSEKEZGWTHGGURFQ2JW4AOZYHVXU5UIX&client_secret=XE00D13XAWZVJMPQEQNQYLJ3XUUYN3JEMFSYPVOTH0YSAQZ4&v=20180820')
       .then(response => response.json())
         .then(response => this.setState({venues: response.response.groups[0].items},
           //a callback function that loads google map
