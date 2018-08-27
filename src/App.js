@@ -6,9 +6,11 @@ import VenuesList from './VenuesList.js'
 
 class App extends Component {
 
-  //Empty array of venues
   state = {
-    venues: []
+    venues: [],
+    infowindow: [],
+    marker: [],
+    map: {}
   }
   
   componentDidMount() {
@@ -45,6 +47,16 @@ class App extends Component {
         content: venue.venue.name + ', ' + venue.venue.location.address
       });
 
+      this.setState({ 
+        infowindow: this.state.infowindow.concat([infowindow])
+      })
+
+      this.setState({ 
+        marker: this.state.marker.concat([marker])
+      })
+
+      this.setState({map: map})
+
       marker.addListener('click', function() {
         infowindow.open(map, marker);
         //Close infowindow after 4s
@@ -56,19 +68,23 @@ class App extends Component {
 
   //Fetch venues from Foursquare API
   getVenues = () => {
-    fetch('https://api.foursquare.com/v2/venues/explore?ll=54.6871555,25.2796514&client_id=Q4IHJEVQLQJ05AGABSEKEZGWTHGGURFQ2JW4AOZYHVXU5UIX&client_secret=XE00D13XAWZVJMPQEQNQYLJ3XUUYN3JEMFSYPVOTH0YSAQZ4&v=20180820')
+    fetch('https://api.foursquare.com/v2/venues/explore?ll=54.6871555,25.2796514&section=coffee&client_id=Q4IHJEVQLQJ05AGABSEKEZGWTHGGURFQ2JW4AOZYHVXU5UIX&client_secret=XE00D13XAWZVJMPQEQNQYLJ3XUUYN3JEMFSYPVOTH0YSAQZ4&v=20180820')
       .then(response => response.json())
         .then(response => this.setState({venues: response.response.groups[0].items},
           //a callback function that loads google map
           this.loadMap("https://maps.googleapis.com/maps/api/js?key=AIzaSyAcES-3fnf6KWMLzALjjuNv0VYMX9UmIZA&callback=initMap")))
   }
 
+  handleClick = () => {
+    alert('clicked');
+}
+
   render() {
     return (
       <div className='app'>
         <Header />
         <main>
-          <VenuesList venues={this.state.venues}/>
+          <VenuesList venues={this.state.venues} infowindow={this.state.infowindow} marker={this.state.marker} handleclick={this.handleClick}/>
           <div id='map'></div>
         </main>
         <Footer />

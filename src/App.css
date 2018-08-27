@@ -20,6 +20,18 @@ main {
   position: relative;
 }
 
+#hamburger-menu {
+  padding-top: 12px;
+  display: none;
+}
+
+.menu {
+  width: 40px;
+  height: 4px;
+  background-color: #ffffff;
+  margin: 0px 0px 6px 20px;
+}
+
 footer {
   height: 3vh;
   margin: 0;
@@ -55,17 +67,39 @@ footer p {
   background-color: #bdded8;
 }
 
-.search-field {
-  display: flex;
-  width: 100%;
-  height: 40px;
-}
-
 input {
-  width: 80%;
+  width: 100%;
+  height: 20px;
 }
 
-button {
-  width: 20%;
+li {
+  cursor: pointer;
 }
 
+@media screen and (max-width: 610px) {
+    .sidebar {
+      -webkit-transform: translate(-300px, 0);
+      transform: translate(-300px, 0);
+      transition: transform 0.3s ease;
+      width: 0;
+      height: 0;
+    }
+
+    .sidebar.open {
+      -webkit-transform: translate(0, 0);
+      transform: translate(0, 0);
+      transition: transform 0.2s ease;
+      width: 500px;
+      }
+
+    #map {
+      width: 100%;
+      position: relative;
+    }
+
+    #hamburger-menu {
+      display: inline-block;
+      position: absolute;
+      cursor: pointer;
+    }
+}

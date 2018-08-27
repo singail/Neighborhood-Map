@@ -18,18 +18,15 @@ class VenuesList extends Component {
              return venue.venue.name.toLowerCase().indexOf(this.state.query) !== -1;});
         return (
             <div className='sidebar'>
-                <div className='search-field'>
-                    <input type='text'
-                        placeholder="Search for venues"
-                        value={this.state.query}
-                        onChange={(event) => this.updateQuery(event.target.value)}
-                    />
-                    <button type='button'>Filter</button>
-                </div>
+                <input type='text'
+                    placeholder="Search for coffee in Vilnius"
+                    value={this.state.query}
+                    onChange={(event) => this.updateQuery(event.target.value)}
+                />
                 <div className='list'>
                     <ul>
                         {searchedVenues.map((venue) =>
-                            <li key={venue.venue.id}>{venue.venue.name}</li>)
+                            <li key={venue.venue.id} onClick={event => {this.props.handleclick}}>{venue.venue.name}</li>)
                         }
                     </ul>
                 </div>
