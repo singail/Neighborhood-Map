@@ -16,7 +16,7 @@ class Header extends Component {
                         <div className='menu'></div>
                         <div className='menu'></div>
                     </div>
-                    <p>Vilnius Coffee Map</p>
+                    <p>Places to visit in Vilnius</p>
                 </div>
           </header>
         );

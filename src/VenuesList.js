@@ -19,7 +19,7 @@ class VenuesList extends Component {
         return (
             <div className='sidebar'>
                 <input type='text'
-                    placeholder="Search for coffee in Vilnius"
+                    placeholder="Search for places in Vilnius"
                     value={this.state.query}
                     onChange={(event) => this.updateQuery(event.target.value)}
                 />

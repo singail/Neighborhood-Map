@@ -18,6 +18,7 @@ main {
   margin: 0;
   padding: 0;
   position: relative;
+  box-shadow: inset -1px -9px 9px 0px rgba(123, 120, 120, 0.75);
 }
 
 #hamburger-menu {
@@ -73,16 +74,28 @@ input {
   height: 20px;
 }
 
+ul {
+  list-style-type: circle;
+  margin-right: 5px;
+}
+
 li {
   cursor: pointer;
   padding: 3px;
   font-size: 1.1em;
+  border-bottom: #888383 2px dotted;
 }
 
 li:hover {
-  color: #e83ebb;
+  color:#bf1357;;
 }
 
+/* Infowindow style */
+
+.gm-style .gm-style-iw {
+  white-space: pre-wrap;
+  text-align: center;
+}
 /* Media querys */
 
 @media screen and (max-width: 1200px) {
