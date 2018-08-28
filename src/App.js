@@ -10,7 +10,8 @@ class App extends Component {
     venues: [],
     infowindow: [],
     marker: [],
-    map: {}
+    map: {},
+    infowindowIsOpen: false
   }
   
   componentDidMount() {
@@ -56,12 +57,23 @@ class App extends Component {
       })
 
       this.setState({map: map})
+      
+      const self=this;
 
       marker.addListener('click', function() {
         infowindow.open(map, marker);
+        self.setState({ 
+          infowindowIsOpen: true
+        })
         //Close infowindow after 4s
         setTimeout(function () { infowindow.close(); }, 4000);
       });
+
+      map.addListener('click', function() {
+        if(self.state.infowindowIsOpen === true) {
+          infowindow.close();
+        }
+      })
   
     })
   }
@@ -75,8 +87,12 @@ class App extends Component {
           this.loadMap("https://maps.googleapis.com/maps/api/js?key=AIzaSyAcES-3fnf6KWMLzALjjuNv0VYMX9UmIZA&callback=initMap")))
   }
 
-  handleClick = () => {
-    alert('clicked');
+  handleClick = (e) => {
+      for (let i = 0; i < this.state.venues.length; i++) {
+        if (e.innerText === this.state.venues[i].venue.name){
+          this.state.infowindow[i].open(this.state.map, this.state.marker[i]);
+          }
+      }
 }
 
   render() {
@@ -84,7 +100,7 @@ class App extends Component {
       <div className='app'>
         <Header />
         <main>
-          <VenuesList venues={this.state.venues} infowindow={this.state.infowindow} marker={this.state.marker} handleclick={this.handleClick}/>
+          <VenuesList venues={this.state.venues} handleclick={this.handleClick}/>
           <div id='map'></div>
         </main>
         <Footer />

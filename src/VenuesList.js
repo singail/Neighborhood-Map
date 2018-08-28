@@ -26,7 +26,7 @@ class VenuesList extends Component {
                 <div className='list'>
                     <ul>
                         {searchedVenues.map((venue) =>
-                            <li key={venue.venue.id} onClick={event => {this.props.handleclick}}>{venue.venue.name}</li>)
+                            <li key={venue.venue.id} onClick={(e) => this.props.handleclick(e.target)}>{venue.venue.name}</li>)
                         }
                     </ul>
                 </div>
