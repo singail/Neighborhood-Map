@@ -13,6 +13,7 @@ class VenuesList extends Component {
         let searchedVenues = this.props.venues.filter((venue) => {
                  return venue.venue.name.toLowerCase().indexOf(this.state.query) !== -1;
              });
+        //This works one step too late
         this.setState({newList: searchedVenues})
     }
 
