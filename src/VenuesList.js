@@ -4,18 +4,24 @@ import './App.css';
 class VenuesList extends Component {
     state = {
         query: '',
-        searchedVenues: []
+        newList: []
     }
     
     //Change the state of query when the user types into the search field
     updateQuery = (query) => {
-        this.setState({query: query});
+        this.setState({query: query})
+        let searchedVenues = this.props.venues.filter((venue) => {
+                 return venue.venue.name.toLowerCase().indexOf(this.state.query) !== -1;
+             });
+        this.setState({newList: searchedVenues})
     }
 
     render() {
-        //filter the list of venues by checking if query matches any venue name
+        //filter the list of venues by checking if query matches venue name
         let searchedVenues = this.props.venues.filter((venue) => {
-             return venue.venue.name.toLowerCase().indexOf(this.state.query) !== -1;});
+             return venue.venue.name.toLowerCase().indexOf(this.state.query) !== -1;
+            });
+
         return (
             <div className='sidebar'>
                 <input type='text'

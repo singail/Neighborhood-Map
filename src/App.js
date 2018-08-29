@@ -82,6 +82,7 @@ class App extends Component {
       })
   
     })
+    
   }
 
   //Fetch venues from Foursquare API
@@ -95,7 +96,6 @@ class App extends Component {
 
   //Open infowindow when the list item is clicked in the sidebar
   handleClick = (e) => {
-   
       for (let i = 0; i < this.state.venues.length; i++) {
         if (e.innerHTML === this.state.venues[i].venue.name){
           this.state.infowindow[i].open(this.state.map, this.state.marker[i]);
@@ -111,8 +111,8 @@ class App extends Component {
       <div className='app'>
         <Header />
         <main>
-          <VenuesList venues={this.state.venues} handleclick={this.handleClick}/>
-          <div id='map'></div>
+          <VenuesList venues={this.state.venues} handleclick={this.handleClick} markers={this.state.marker}/>
+          <div id='map' role='application'></div>
         </main>
         <Footer />
       </div>
