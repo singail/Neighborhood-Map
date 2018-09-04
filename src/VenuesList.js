@@ -14,7 +14,12 @@ class VenuesList extends Component {
         let searchedVenues = this.props.venues.filter((venue) => {
                  return venue.venue.name.toLowerCase().indexOf(query) !== -1;
              });
+<<<<<<< HEAD
         
+||||||| merged common ancestors
+=======
+        //This works one step too late
+>>>>>>> 7c2dfe84cbf81ed2a75581d942d1a738d9c546f7
         this.setState({newList: searchedVenues})
 
         let searchedMarkers = this.props.markers.filter((oneMarker) => {
