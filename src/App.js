@@ -10,8 +10,7 @@ class App extends Component {
     venues: [],
     infowindow: [],
     marker: [],
-    map: {},
-    infowindowIsOpen: false
+    map: {}
   }
   
   componentDidMount() {
@@ -33,7 +32,7 @@ class App extends Component {
   initMap = () => {
     const map = new window.google.maps.Map(document.getElementById('map'), {
       center: {lat: 54.6871555, lng: 25.2796514},
-      zoom: 16
+      zoom: 15
     });
 
     //Map through venues array and create a marker and an infowindow for each venue
@@ -65,30 +64,37 @@ class App extends Component {
       const self=this;
 
       marker.addListener('click', function() {
+   
         map.setCenter(marker.getPosition());
+        map.setZoom(16);
         infowindow.open(map, marker);
-        self.setState({ 
-          infowindowIsOpen: true
-        })
+
+        marker.setAnimation(window.google.maps.Animation.BOUNCE);
+
         //Close infowindow after 4s
-        setTimeout(function () {infowindow.close();},
-                                4000);
+        setTimeout(function () {infowindow.close();
+          }, 4000);
+
+        //stop animation after 1s
+        setTimeout(function () {
+          marker.setAnimation(null);}, 1000);
+                                  
       });
 
       // Close infowindow when the user clicks on the map
       map.addListener('click', function() {
-        if(self.state.infowindowIsOpen === true) {
           infowindow.close();
-        }
-      })
-  
+          marker.setAnimation(null);
+          map.setCenter({lat: 54.6871555, lng: 25.2796514});
+          map.setZoom(15);
+       })
+
     })
-    
   }
 
   //Fetch venues from Foursquare API
   getVenues = () => {
-    fetch('https://api.foursquare.com/v2/venues/explore?ll=54.6871555,25.2796514&section=arts&limit=15&client_id=Q4IHJEVQLQJ05AGABSEKEZGWTHGGURFQ2JW4AOZYHVXU5UIX&client_secret=XE00D13XAWZVJMPQEQNQYLJ3XUUYN3JEMFSYPVOTH0YSAQZ4&v=20180820')
+    fetch('https://api.foursquare.com/v2/venues/explore?ll=54.6871555,25.2796514&section=arts&limit=16&client_id=Q4IHJEVQLQJ05AGABSEKEZGWTHGGURFQ2JW4AOZYHVXU5UIX&client_secret=XE00D13XAWZVJMPQEQNQYLJ3XUUYN3JEMFSYPVOTH0YSAQZ4&v=20180820')
       .then(response => response.json())
         .then(response => this.setState({venues: response.response.groups[0].items},
           //a callback function that loads google map
@@ -100,10 +106,19 @@ class App extends Component {
       for (let i = 0; i < this.state.venues.length; i++) {
         if (e.innerHTML === this.state.venues[i].venue.name){
           this.state.infowindow[i].open(this.state.map, this.state.marker[i]);
-          this.setState({
-            infowindowIsOpen: true
-          });
-          }
+          this.state.marker[i].setAnimation(window.google.maps.Animation.BOUNCE);
+          this.state.map.setCenter(this.state.marker[i].getPosition());
+          this.state.map.setZoom(16);
+          const self = this;
+          (function (x) {
+            setTimeout(function () { self.state.infowindow[x].close();
+              self.state.marker[x].setAnimation(null);
+            }, 10000);
+        })(i);
+        } else {
+          this.state.infowindow[i].close();
+          this.state.marker[i].setAnimation(null);
+        }
       }
 }
 
