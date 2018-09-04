@@ -71,7 +71,8 @@ class App extends Component {
           infowindowIsOpen: true
         })
         //Close infowindow after 4s
-        setTimeout(function () { infowindow.close(); }, 4000);
+        setTimeout(function () {infowindow.close();},
+                                4000);
       });
 
       // Close infowindow when the user clicks on the map
@@ -111,7 +112,7 @@ class App extends Component {
       <div className='app'>
         <Header />
         <main>
-          <VenuesList venues={this.state.venues} handleclick={this.handleClick} markers={this.state.marker}/>
+          <VenuesList venues={this.state.venues} handleclick={this.handleClick} markers={this.state.marker} updateMarkers={this.updateMarkers}/>
           <div id='map' role='application'></div>
         </main>
         <Footer />
