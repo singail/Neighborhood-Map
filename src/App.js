@@ -37,7 +37,7 @@ class App extends Component {
 
     //Map through venues array and create a marker and an infowindow for each venue
     var image = 'http://res.cloudinary.com/dcu12ytpp/image/upload/v1535457374/MapMarker_Marker_Inside_Pink_1_ehgq2p.png';
- 
+
     this.state.venues.map(venue => {
       const marker = new window.google.maps.Marker({
         position: {lat: venue.venue.location.lat, lng: venue.venue.location.lng},
@@ -94,7 +94,7 @@ class App extends Component {
 
   //Fetch venues from Foursquare API
   getVenues = () => {
-    fetch('https://api.foursquare.com/v2/venues/explore?ll=54.6871555,25.2796514&section=arts&limit=16&client_id=Q4IHJEVQLQJ05AGABSEKEZGWTHGGURFQ2JW4AOZYHVXU5UIX&client_secret=XE00D13XAWZVJMPQEQNQYLJ3XUUYN3JEMFSYPVOTH0YSAQZ4&v=20180820')
+    fetch('https://api.foursquare.com/v2/venues/explore?ll=54.6871555,25.2796514&section=arts&limit=20&client_id=Q4IHJEVQLQJ05AGABSEKEZGWTHGGURFQ2JW4AOZYHVXU5UIX&client_secret=XE00D13XAWZVJMPQEQNQYLJ3XUUYN3JEMFSYPVOTH0YSAQZ4&v=20180820')
       .then(response => response.json())
         .then(response => this.setState({venues: response.response.groups[0].items},
           //a callback function that loads google map
@@ -123,11 +123,16 @@ class App extends Component {
 }
 
   render() {
+    
     return (
       <div className='app'>
         <Header />
         <main>
-          <VenuesList venues={this.state.venues} handleclick={this.handleClick} markers={this.state.marker} updateMarkers={this.updateMarkers}/>
+          <VenuesList venues={this.state.venues} 
+                      handleclick={this.handleClick} 
+                      markers={this.state.marker} 
+                      updateMarkers={this.updateMarkers}
+          />
           <div id='map' role='application'></div>
         </main>
         <Footer />

@@ -7,19 +7,15 @@ class VenuesList extends Component {
         newList: [],
         newMarkers: []
     }
-    
+
     //Change the state of query when the user types into the search field
     updateQuery = (query) => {
+        
         this.setState({query: query})
         let searchedVenues = this.props.venues.filter((venue) => {
                  return venue.venue.name.toLowerCase().indexOf(query) !== -1;
              });
-<<<<<<< HEAD
         
-||||||| merged common ancestors
-=======
-        //This works one step too late
->>>>>>> 7c2dfe84cbf81ed2a75581d942d1a738d9c546f7
         this.setState({newList: searchedVenues})
 
         let searchedMarkers = this.props.markers.filter((oneMarker) => {
@@ -40,6 +36,13 @@ class VenuesList extends Component {
         })
     }
 
+    // //not working on images
+    // setImageAttributes = () => {
+    //     const images = window.document.getElementsByClassName('img');
+    //     console.log(images);
+    //     [...images].forEach(image => {image.removeAttribute('alt'); image.setAttribute('alt', 'marker');});
+    // }
+
     render() {
         //filter the list of venues by checking if query matches venue name
         let searchedVenues = this.props.venues.filter((venue) => {
@@ -48,15 +51,16 @@ class VenuesList extends Component {
 
         return (
             <div className='sidebar'>
-                <input type='text'
-                    placeholder="Search for places in Vilnius"
+                <input aria-label='search field' 
+                    type='text'
+                    placeholder="Search for places"
                     value={this.state.query}
                     onChange={(event) => this.updateQuery(event.target.value)}
                 />
                 <div className='list'>
                     <ul>
                         {searchedVenues.map((venue) =>
-                            <li key={venue.venue.id} onClick={(e) => this.props.handleclick(e.target)}>{venue.venue.name}</li>)
+                            <li tabIndex='0' className='list-item' aria-label={venue.venue.name} key={venue.venue.id} onClick={(e) => this.props.handleclick(e.target)}>{venue.venue.name}</li>)
                         }
                     </ul>
                 </div>
