@@ -60,6 +60,12 @@ footer p {
   padding: 20px;
 }
 
+.data {
+  float: right;
+  margin: 5px;
+  font-size: 12px;
+}
+
 /* Sidebar style */
 
 .sidebar {
@@ -78,30 +84,27 @@ input {
 }
 
 ul {
-  list-style-type: circle;
-  margin-right: 5px;
+  list-style-type: none;
   display: table-cell;
-  padding-bottom: 20px;
-  padding-top: 20px;
-  padding-right: 20px;
+  padding: 20px;
 }
 
 li {
   cursor: pointer;
-  padding: 5px 0 5px 0;
-  margin-right: 20px;
+  padding: 5px;
   font-size: 1.1em;
   border-bottom: #888383 2px dotted;
 }
 
 li:hover {
-  color:#bf1357;;
+  color:#bf1357;
+  border: 1px #736d6d solid;
+  background-color: #a5d1cc;
+  box-shadow: inset 1px -1px 2px 0px rgba(123, 120, 120, 0.75);
 }
 
-.data {
-  float: right;
-  margin: 5px;
-  font-size: 12px;
+.sidebar p {
+  padding: 10px;
 }
 
 /* Infowindow style */
@@ -171,5 +174,9 @@ li:hover {
 
     .menu {
       height: 3px;
+    }
+
+    ul {
+      padding: 20px 10px;
     }
 }

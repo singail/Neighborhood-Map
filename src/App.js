@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './Header.js';
 import Footer from './Footer.js';
-import VenuesList from './VenuesList.js'
+import VenuesList from './VenuesList.js';
 
 class App extends Component {
 
@@ -35,10 +35,12 @@ class App extends Component {
       zoom: 15
     });
 
-    //Map through venues array and create a marker and an infowindow for each venue
+    //marker image
     var image = 'http://res.cloudinary.com/dcu12ytpp/image/upload/v1535457374/MapMarker_Marker_Inside_Pink_1_ehgq2p.png';
 
+    //Map through venues array and create a marker and an infowindow for each venue
     this.state.venues.map(venue => {
+      //Create marker for every venue
       const marker = new window.google.maps.Marker({
         position: {lat: venue.venue.location.lat, lng: venue.venue.location.lng},
         map: map,
@@ -47,6 +49,7 @@ class App extends Component {
         animation: window.google.maps.Animation.DROP
       })
 
+      //Create an infowindow for every venue
       const infowindow = new window.google.maps.InfoWindow({
         content: venue.venue.name + '\n ' + venue.venue.location.address
       });
@@ -60,8 +63,6 @@ class App extends Component {
       })
 
       this.setState({map: map})
-
-      const self=this;
 
       marker.addListener('click', function() {
    
@@ -92,6 +93,8 @@ class App extends Component {
     })
   }
 
+  gm_authFailure = () => { alert('Google Maps failed to load') };
+
   //Fetch venues from Foursquare API
   getVenues = () => {
     fetch('https://api.foursquare.com/v2/venues/explore?ll=54.6871555,25.2796514&section=arts&limit=20&client_id=Q4IHJEVQLQJ05AGABSEKEZGWTHGGURFQ2JW4AOZYHVXU5UIX&client_secret=XE00D13XAWZVJMPQEQNQYLJ3XUUYN3JEMFSYPVOTH0YSAQZ4&v=20180820')
@@ -99,6 +102,7 @@ class App extends Component {
         .then(response => this.setState({venues: response.response.groups[0].items},
           //a callback function that loads google map
           this.loadMap("https://maps.googleapis.com/maps/api/js?key=AIzaSyAcES-3fnf6KWMLzALjjuNv0VYMX9UmIZA&callback=initMap")))
+          .catch((error) => {alert('Failed to load data from Foursquare ' + error); console.log(error);});
   }
 
   //Open infowindow when the list item is clicked in the sidebar
@@ -120,7 +124,7 @@ class App extends Component {
           this.state.marker[i].setAnimation(null);
         }
       }
-}
+  }
 
   render() {
     
@@ -130,7 +134,9 @@ class App extends Component {
         <main>
           <VenuesList venues={this.state.venues} 
                       handleclick={this.handleClick} 
-                      markers={this.state.marker} 
+                      markers={this.state.marker}
+                      infowindows={this.state.infowindow}
+                      map={this.state.map}
                       updateMarkers={this.updateMarkers}
           />
           <div id='map' role='application'></div>
