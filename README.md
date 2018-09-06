@@ -12,6 +12,8 @@ This app uses [Google Maps API](https://developers.google.com/maps/documentation
 
 * Start the server with `npm start`. The site will automatically open in `http://localhost:3000`.
 
+Live page preview: [Vilnius Map](https://vilniusmap.netlify.com/)
+
 ## Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
