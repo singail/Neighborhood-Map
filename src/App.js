@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from './Header.js';
-import Footer from './Footer.js';
-import VenuesList from './VenuesList.js';
+import Header from './Components/Header.js';
+import Footer from './Components/Footer.js';
+import VenuesList from './Components/VenuesList.js';
 
 class App extends Component {
 
@@ -10,7 +10,8 @@ class App extends Component {
     venues: [],
     infowindow: [],
     marker: [],
-    map: {}
+    map: {},
+    style: require('./MapStyle.json')
   }
   
   componentDidMount() {
@@ -32,7 +33,8 @@ class App extends Component {
   initMap = () => {
     const map = new window.google.maps.Map(document.getElementById('map'), {
       center: {lat: 54.6871555, lng: 25.2796514},
-      zoom: 15
+      zoom: 15,
+      styles: this.state.style
     });
 
     //marker image
@@ -40,38 +42,38 @@ class App extends Component {
 
     //Map through venues array and create a marker and an infowindow for each venue
     this.state.venues.map(venue => {
-      //Create marker for every venue
+      //Create marker for each venue
       const marker = new window.google.maps.Marker({
         position: {lat: venue.venue.location.lat, lng: venue.venue.location.lng},
         map: map,
         title: venue.venue.name,
         icon: image,
         animation: window.google.maps.Animation.DROP
-      })
+      });
 
-      //Create an infowindow for every venue
+      //Create an infowindow for each venue
       const infowindow = new window.google.maps.InfoWindow({
         content: venue.venue.name + '\n ' + venue.venue.location.address
       });
 
       this.setState({ 
         infowindow: this.state.infowindow.concat([infowindow])
-      })
+      });
 
       this.setState({ 
         marker: this.state.marker.concat([marker])
-      })
+      });
 
-      this.setState({map: map})
+      this.setState({map: map});
+
 
       marker.addListener('click', function() {
-   
+
         map.setCenter(marker.getPosition());
         map.setZoom(16);
         infowindow.open(map, marker);
-
         marker.setAnimation(window.google.maps.Animation.BOUNCE);
-
+        
         //Close infowindow after 4s
         setTimeout(function () {infowindow.close();
           }, 4000);
