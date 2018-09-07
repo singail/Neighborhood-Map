@@ -52,9 +52,11 @@ class VenuesList extends Component {
     updateMarkers = () => {
         this.props.markers.map((marker) => {
             marker.setVisible(false);
+            return null
         })
         this.state.newMarkers.map((newMarker) => {
             newMarker.setVisible(true);
+            return null
         })
     }
 

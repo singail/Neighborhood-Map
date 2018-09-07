@@ -94,6 +94,8 @@ class App extends Component {
           map.setCenter({lat: 54.6871555, lng: 25.2796514});
           map.setZoom(15);
        })
+       
+       return null
     })
   }
 

@@ -6,7 +6,7 @@ This app uses [Google Maps API](https://developers.google.com/maps/documentation
 
 ## How To Run The Page in Developement mode
 
-* Clone this git repository by pasting this to the git command line: git clone https://github.com/singail/Neighborhood-Map.git
+* Clone this git repository by pasting this to the git command line: `git clone https://github.com/singail/Neighborhood-Map.git`
 
 * Install all project dependencies with `npm install`
 

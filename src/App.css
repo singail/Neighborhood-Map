@@ -4,7 +4,7 @@ main {
 
 /* Map style */
 #map {
-  height: 88vh;
+  height: 86vh;
   margin: 0;
   padding: 0;
   width: 80%;
@@ -12,7 +12,7 @@ main {
 
 /* Header & Footer style */
 .header {
-  height: 6vh;
+  height: 8vh;
   background-color: #a5d1cc;
   width: 100%;
   margin: 0;
@@ -22,7 +22,6 @@ main {
 }
 
 #hamburger-menu {
-  padding-top: 12px;
   display: none;
 }
 
@@ -69,7 +68,7 @@ footer p {
 /* Sidebar style */
 
 .sidebar {
-  height: 88vh;
+  height: 86vh;
   margin: 0;
   padding: 0;
   width: 20%;
@@ -160,6 +159,7 @@ li:hover {
       display: inline-block;
       position: absolute;
       cursor: pointer;
+      padding: 20px 0;
     }
 }
 
@@ -173,7 +173,7 @@ li:hover {
     }
 
     .menu {
-      height: 3px;
+      height: 2px;
     }
 
     ul {
