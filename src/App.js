@@ -18,6 +18,7 @@ class App extends Component {
     this.getVenues();
     //set initMap function as global
     window.initMap = this.initMap;
+    window.gm_authFailure = this.gm_authFailure;
   }
 
   //Create a script tag with google maps url
@@ -27,6 +28,9 @@ class App extends Component {
     script.setAttribute('async', '');
     script.setAttribute('defer', '');
     document.body.appendChild(script);
+    script.onerror = function () {
+      alert('Failed to load Google Maps!');
+    }
   }
 
   //Initialize google map
@@ -66,7 +70,6 @@ class App extends Component {
 
       this.setState({map: map});
 
-
       marker.addListener('click', function() {
 
         map.setCenter(marker.getPosition());
@@ -91,11 +94,12 @@ class App extends Component {
           map.setCenter({lat: 54.6871555, lng: 25.2796514});
           map.setZoom(15);
        })
-
     })
   }
 
-  gm_authFailure = () => { alert('Google Maps failed to load') };
+  gm_authFailure = () =>  {
+    alert('Google Maps failed to load');
+  };
 
   //Fetch venues from Foursquare API
   getVenues = () => {
@@ -104,7 +108,10 @@ class App extends Component {
         .then(response => this.setState({venues: response.response.groups[0].items},
           //a callback function that loads google map
           this.loadMap("https://maps.googleapis.com/maps/api/js?key=AIzaSyAcES-3fnf6KWMLzALjjuNv0VYMX9UmIZA&callback=initMap")))
-          .catch((error) => {alert('Failed to load data from Foursquare ' + error); console.log(error);});
+          .catch((error) => {
+            alert('Failed to load data from Foursquare ' + error);
+            console.log(error);
+          });
   }
 
   //Open infowindow when the list item is clicked in the sidebar

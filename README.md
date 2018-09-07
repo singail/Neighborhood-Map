@@ -4,7 +4,7 @@ This project is a part of the Front-End Web Developer Nanodegree Program of Udac
 
 This app uses [Google Maps API](https://developers.google.com/maps/documentation/javascript/tutorial) and [Foursquare API](https://developer.foursquare.com/) to fetch data about the locations. 
 
-## How To Run The Page?
+## How To Run The Page in Developement mode
 
 * Clone this git repository by pasting this to the git command line: git clone https://github.com/singail/Neighborhood-Map.git
 
@@ -13,6 +13,18 @@ This app uses [Google Maps API](https://developers.google.com/maps/documentation
 * Start the server with `npm start`. The site will automatically open in `http://localhost:3000`.
 
 Live page preview: [Vilnius Map](https://vilniusmap.netlify.com/)
+
+## How To Run The Page in Production mode
+
+Important! The service worker is implemented only in production mode. 
+
+Follow these instructions to run the app in production mode:
+
+* Clone this git repository by pasting this to the git command line: `git clone https://github.com/singail/Neighborhood-Map.git`
+
+* Run `npm run build` and `serve -s build` to build production-ready app.
+
+* Navigate to local server `http://localhost:5000/`
 
 ## Create React App
 
