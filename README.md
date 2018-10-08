@@ -12,7 +12,7 @@ This app uses [Google Maps API](https://developers.google.com/maps/documentation
 
 * Start the server with `npm start`. The site will automatically open in `http://localhost:3000`.
 
-Live page preview: [Vilnius Map](https://vilniusmap.netlify.com/)
+Live page preview: [Vilnius Map](https://singail.github.io/Neighborhood-Map/)
 
 ## How To Run The Page in Production mode
 
